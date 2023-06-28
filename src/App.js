@@ -1,24 +1,28 @@
 import "./App.css";
+import { useEffect } from "react";
 import { useState } from "react";
+
 function App() {
-  const [number, setNumber] = useState(0);
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    console.log("안녕이펙트");//첫렌더링시에 의존성 배열이 빈값이면 한번만 실행
+
+    return ()=>{ //컴포넌트가 화면에서 사라졌을때 
+      console.log("사라집니다!")
+    }
+  }, []);
 
   return (
-    <>
-      <div>number state: {number}</div>
-      <button
-        onClick={() => {
-          // setNumber(number+1);
-          // setNumber(number+2);
-          // setNumber(number+3);
-          setNumber((curNum) => curNum + 1);
-          setNumber((curNum) => curNum + 1);
-          setNumber((curNum) => curNum + 1);
+    <div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
         }}
-      >
-        누르면 up
-      </button>
-    </>
+      ></input>
+    </div>
   );
 }
 
