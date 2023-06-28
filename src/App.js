@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useState } from "react";
 function App() {
+  const [number, setNumber] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>number state: {number}</div>
+      <button
+        onClick={() => {
+          // setNumber(number+1);
+          // setNumber(number+2);
+          // setNumber(number+3);
+          setNumber((curNum) => curNum + 1);
+          setNumber((curNum) => curNum + 1);
+          setNumber((curNum) => curNum + 1);
+        }}
+      >
+        누르면 up
+      </button>
+    </>
   );
 }
 
