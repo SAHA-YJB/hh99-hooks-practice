@@ -1,28 +1,41 @@
-import "./App.css";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function App() {
-  const [value, setValue] = useState("");
-
+  const [id, setId] = useState("");
+  const idRef = useRef("");
+  const pwRef = useRef("");
+  //화면이 렌더링될때 어떤작업을 하고 싶다
+  
   useEffect(() => {
-    console.log("안녕이펙트");//첫렌더링시에 의존성 배열이 빈값이면 한번만 실행
-
-    return ()=>{ //컴포넌트가 화면에서 사라졌을때 
-      console.log("사라집니다!")
-    }
+    //idRef를 인풋태그와 연결하고 렌더링시 포커스지정
+    idRef.current.focus();
   }, []);
-
+  
+  useEffect(() => {
+    if (id.length >= 10) {
+      pwRef.current.focus();
+    }
+  }, [id]);//아이디라는 스테이트가 바뀔때마다 유즈이펙트 실행
   return (
-    <div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
-      ></input>
-    </div>
+    <>
+      <div>
+        아이디 :{" "}
+        <input
+          value={id}
+          type="text"
+          ref={idRef}
+          onChange={(e) => {
+            setId(e.target.value);
+            if (id.length >= 10) {
+              pwRef.current.focus();
+            } //
+          }}
+        />
+      </div>
+      <div>
+        비밀번호 : <input type="password" ref={pwRef} />
+      </div>
+    </>
   );
 }
 
